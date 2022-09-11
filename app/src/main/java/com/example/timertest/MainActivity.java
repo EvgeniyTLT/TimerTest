@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private int seconds = 0;
     private boolean isRunning = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
