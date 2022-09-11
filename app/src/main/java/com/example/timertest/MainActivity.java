@@ -45,6 +45,20 @@ public class MainActivity extends AppCompatActivity {
         isRunning = wasRunning;
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        wasRunning = isRunning;
+        isRunning = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isRunning = wasRunning;
+    }
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
