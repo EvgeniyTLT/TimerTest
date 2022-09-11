@@ -1,5 +1,6 @@
 package com.example.timertest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -20,8 +21,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textViewTimer = findViewById(R.id.textViewTimer);
+        if (savedInstanceState != null) {
+            seconds = savedInstanceState.getInt("seconds");
+            isRunning = savedInstanceState.getBoolean("isRunning");
+        }
         runTimer();
         Log.d("MyLog", "create" + " " + isRunning + " " + seconds);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("seconds", seconds);
+        outState.putBoolean("isRunning", isRunning);
     }
 
     public void onClickPauseStart(View view) {
@@ -40,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MyLog", "stop" + " " + isRunning + " " + seconds);
     }
 
+
     private void runTimer() {
         final Handler handler = new Handler();
         handler.post(new Runnable() {
@@ -52,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewTimer.setText(time);
                 Log.d("MyLog", " " + hours + " " + minutes + " " + secs);
                 if (isRunning) {
-                    seconds+=30 ;
+                    seconds += 30;
                 }
                 handler.postDelayed(this, 1000);
             }
